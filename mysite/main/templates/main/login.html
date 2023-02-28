@@ -1,0 +1,58 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+    <div class="logo">
+    <a href="/#"><img src="{% static 'images/logo.png' %}"></a>
+</div>
+<!--login-->
+<div class="container1">
+    <h1>Login</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ login_form | crispy }}
+        <button class="btn btn-primary" type="submit">Login</button>
+
+    </form>
+    <p class="text">Don't have an account? <a href="/register">Create an account</a></p>
+</div>
+    <div class="bottom">
+    <div class="buy">
+        <ul>
+        <li><h3>Buy</h3></li>
+        <li><a href="/register">Registration</a></li>
+        <li><a href="/login">Login</a></li>
+        </ul>
+        </div>
+        <div class="Buy">
+        <ul>
+        <li><h3>About us</h3></li>
+        <li><a href="#">Company info</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Advertise with us</a></li>
+        <li><a href="#">Policies</a></li>
+        </ul>
+        </div>
+        <div class="buy">
+        <ul>
+        <li><h3>Help and Contact</h3></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact us</a></li>
+        </ul>
+        </div>
+    </div>
+    </body>
+    </html>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+{% load bootstrap %}
+<html>
+<head>
+    <title>ebazar</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="logo">
+    <a href="/#"><img src="{% static 'images/logo.png' %}"></a>
+</div>
+
+<hr>
+<div class="container">
+    <div class="top">
+        <div class="top_left">
+            <a href="/#">Home</a>
+            {% if user.is_authenticated %}
+            <a href="/sell">Sell</a>
+            {% else %}
+            <a href="/login">Sell</a>
+            {% endif %}
+            <a href="/allproduct">All Products</a>
+               <div class="search"> <form method="GET" action="{% url 'main:allproduct' %}">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Product name..." name="q" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
+                     <button>
+                    <i class="fa fa-search"></i>
+                </button>
+             </form>
+            </div>
+        </div>
+        <div class="top_right">
+            {% if user.is_authenticated %}
+                <a  href="#">Hi, {{user.username}}</a>
+                <a  href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+
+
+            {% else %}
+
+                <a  href="/login">Login/Register</a>
+
+            {% endif %}
+
+            {% if user.is_authenticated %}
+
+            <a href="/profile"><i class="fa-solid fa-user"></i></a>
+
+            {% else %}
+
+            <a href="/login"><i class="fa-solid fa-user"></i></a>
+
+            {% endif %}
+
+        </div>
+        </div>
+</div>
+<div class="details">
+    <div class="detail">
+        <div class="image_section">
+             {%if sell.image%}
+            <img src = "{{sell.image.url}}" />
+            {%endif%}
+            <hr>
+            <br>
+            <h5> {{user.username}} || {{user.email}}</h5>
+
+
+
+        </div>
+    </div>
+    <div class="detail1">
+           <div class="description_head">
+                <h5>Product</h5>
+                <p>{{sell.name}}</p>
+               <h5>Price</h5>
+                    <p>Rs. {{sell.price}}</p>
+                <h5>Condition</h5>
+                    <p>{{sell.condition}}</p>
+                <h5>Category</h5>
+                    <p>{{sell.category}}</p>
+                <h5>Brand</h5>
+                    <p>{{sell.brand}}</p>
+                <h5>Description</h5>
+                <p>{{sell.description}}</p>
+           </div>
+    </div>
+    <div class="detail2">
+        <div class="comments_head">
+                <h5>Comments</h5>
+            {%for com in comment%}
+                <p>{{com.owner}} :: {{com.text}}</p>
+            {%endfor%}
+                <form method="POST">
+				{% csrf_token %}
+				{{Commentforms|bootstrap}}
+				<div class="new_people">
+					<input type="submit" value="Comment">
+				</div>
+			</form>
+            </div>
+        </div>
+  <hr>
+</div>
+</body>
+</html>
+{% endblock %}

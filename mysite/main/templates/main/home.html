@@ -1,0 +1,163 @@
+{% extends "main/header.html" %}
+{% block content %}
+<html>
+<head>
+    <title>ebazar</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="logo">
+    <a href="/#"><img src="{% static 'images/logo.png' %}"></a>
+</div>
+
+<hr>
+<div class="container">
+    <div class="top">
+        <div class="top_left">
+            <a href="/#">Home</a>
+            {% if user.is_authenticated %}
+            <a href="/sell">Sell</a>
+            {% else %}
+            <a href="/login">Sell</a>
+            {% endif %}
+            <a href="/allproduct">All Products</a>
+               <div class="search"> <form method="GET" action="{% url 'main:allproduct' %}">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Product name..." name="q" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
+                     <button>
+                    <i class="fa fa-search"></i>
+                </button>
+             </form>
+            </div>
+        </div>
+        <div class="top_right">
+            {% if user.is_authenticated %}
+                <a  href="#">Hi, {{user.username}}</a>
+                <a  href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+
+
+            {% else %}
+
+                <a  href="/login">Login/Register</a>
+
+            {% endif %}
+
+            {% if user.is_authenticated %}
+
+            <a href="/profile"><i class="fa-solid fa-user"></i></a>
+
+            {% else %}
+
+            <a href="/login"><i class="fa-solid fa-user"></i></a>
+
+            {% endif %}
+
+        </div>
+        </div>
+</div>
+<div class="categories">
+    <a href="/categories/Mobile">Electronics</a>
+    <a href="">Fashion</a>
+    <a href="">Health & Beauty</a>
+    <a href="">Home & Garden</a>
+    <a href="">Sports</a>
+    <a href="">Collectibles and Art</a>
+    <a href="">Industrial equipment</a>
+    <a href="">Motors</a>
+</div>
+<div class="popular_brands">
+    <div class="popular_row">
+    <h1><a href="#">Explore popular brands</a>
+    <a href="#">See all &rarr;</a></h1>
+    </div>
+    <div class="brands_img">
+        <ul>
+            <li><a href="#"><img src="{% static 'images/apple.png' %}"></a></li>
+            <li><a href="/brand/Apple"><span>Apple</span></a></li>
+        </ul>
+        <ul>
+            <li><a href="#"><img src="{% static 'images/samsung.png' %}"></a></li>
+            <li><a href="/brand/Samsung"><span>Samsung</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/nike.png' %}"></a></li>
+            <li><a href="#"><span>Nike</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/sony.png' %}"></a></li>
+            <li><a href="#"><span>Sony PS</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/oneplus.png' %}"></a></li>
+            <li><a href="#"><span>One plus</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/xiaomi.png' %}"></a></li>
+            <li><a href="#"><span>Xiaomi</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/louis.png' %}"></a></li>
+            <li><a href="#"><span>Louis Vuitton</span></a></li>
+        </ul>
+    </div>
+    </div>
+<div class="popular_brands">
+    <div class="popular_row">
+    <h1><a href="#">Explore popular categories</a>
+    <a href="#">See all &rarr;</a></h1>
+    </div>
+    <div class="brands_img">
+        <ul>
+            <li><a href="#"><img src="{% static 'images/smartphones.png' %}"></a></li>
+            <li><a href="/categories/Mobile"><span>Phones</span></a></li>
+        </ul>
+        <ul>
+            <li><a href="#"><img src="{% static 'images/beauty.png' %}"></a></li>
+            <li><a href="#"><span>Beauty</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/accessories.png' %}"></a></li>
+            <li><a href="#"><span>Accessories</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/sneakers.png' %}"></a></li>
+            <li><a href="#"><span>Sneakers</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/fishing.png' %}"></a></li>
+            <li><a href="#"><span>Fishing</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/watches.png' %}"></a></li>
+            <li><a href="#"><span>Watches</span></a></li>
+        </ul><ul>
+            <li><a href="#"><img src="{% static 'images/beauty.png' %}"></a></li>
+            <li><a href="#"><span>Makeup</span></a></li>
+        </ul>
+    </div>
+    </div>
+         <hr>
+    <div class="bottom">
+    <div class="buy">
+        <ul>
+        <li><h3>Buy</h3></li>
+        <li><a href="/register">Registration</a></li>
+        <li><a href="/login">Login</a></li>
+        </ul>
+        </div>
+        <div class="Buy">
+        <ul>
+        <li><h3>About us</h3></li>
+        <li><a href="#">Company info</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Advertise with us</a></li>
+        <li><a href="#">Policies</a></li>
+        </ul>
+        </div>
+        <div class="buy">
+        <ul>
+        <li><h3>Help and Contact</h3></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact us</a></li>
+        </ul>
+        </div>
+    </div>
+
+</body>
+</html>
+ {% endblock %}

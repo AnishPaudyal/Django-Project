@@ -1,0 +1,35 @@
+{% extends 'main/home.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load bootstrap %}
+<html>
+
+<head>
+    <title>ebazar</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sell.css' %}" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="logo">
+    <a href="/#"><img src="{% static 'images/logo.png' %}"></a>
+</div>
+	<div class="submit-ad main-grid-border">
+		<div class="container">
+			<h2 class="head" align="center">Post an Ad</h2>
+			<form ENCTYPE="multipart/form-data" method="POST">
+				{% csrf_token %}
+				{{Sellform|bootstrap}}
+				<div class="new_people">
+					<h1><input type="submit" value="Post Ad"> </input></h1>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>
+	<!-- // Submit Ad -->
+{% endblock content %}
